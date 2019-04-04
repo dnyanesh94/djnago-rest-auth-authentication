@@ -1,0 +1,730 @@
+	<!-- Component section start -->
+	
+<div class="component-section">
+	
+	<div class="row mx-0">
+		
+		<!-- Left section start -->
+		
+		<div class="col-10 col-sm-10 col-md-10 col-lg-10 p-0">
+			
+			<!-- Breadcumb start -->
+			
+			<div class="row mx-0">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							
+							<li class="breadcrumb-item ">Student</li>
+							
+							<li *ngIf=" pageView == 1 " class="breadcrumb-item" 
+								[ngClass]="  pageView == 1 ? 'active' : '' " 
+								aria-current="personal-info"
+							>
+								Personal Information
+							</li>
+							
+							<li *ngIf=" pageView == 2 " class="breadcrumb-item" 
+								[ngClass]="  pageView == 2 ? 'active' : '' " 
+								aria-current="address-info"
+							>
+								Address Information
+							</li>
+
+							<li *ngIf=" pageView == 3 " class="breadcrumb-item" 
+								[ngClass]="  pageView == 3 ? 'active' : '' " 
+								aria-current="contact-info"
+							>
+								Contact Information
+							</li>
+
+							<li *ngIf=" pageView == 4 " class="breadcrumb-item" 
+								[ngClass]="  pageView == 4 ? 'active' : '' " 
+								aria-current="parent-info"
+							>
+								Parent Information
+							</li>
+							
+						</ol>
+					</nav>
+				</div>
+			</div>
+
+			<!-- Breadcumb end -->
+
+			<!-- ###########################################################-->
+
+			<!-- Personal information section start -->
+
+			<section id="personal-info" *ngIf="pageView == 1">
+				<div class="row mx-0 p-4">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
+						<form class="p-4"  name="studentForm" (ngSubmit)="f.form.valid && updateStudent()" #f="ngForm" novalidate>
+							<div class="row mx-0">
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group ">
+										<label for="first_name" class="col-form-label">First Name</label>
+										<input type="text" 
+											name="first_name"
+											class="form-control form-control-sm" 
+											[(ngModel)]="student.first_name"
+											#firstName="ngModel"
+											placeholder="First name"
+											[ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" 
+											required minlength="2"
+										>
+										<div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+											<div *ngIf="firstName.errors.required">first name is required</div>
+											<div *ngIf="firstName.errors.minlength">first name must be at least 2 characters</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">	
+									<div class="form-group ">
+										<label for="middle_name" class="col-form-label">Middle Name</label>
+										<input type="text" 
+											name="middle_name"
+											class="form-control form-control-sm"
+											[(ngModel)]="student.middle_name" 
+											placeholder="Middle name"
+										>
+									</div>		
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">	
+									<div class="form-group ">
+										<label for="last_name" class="col-form-label">Last Name</label>
+										<input type="text" 
+											name="last_name"
+											class="form-control form-control-sm" 
+											[(ngModel)]="student.last_name"
+											placeholder="Last name"
+										>
+									</div>		
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">	
+									<div class="form-group ">
+										<label for="mother_name" class="col-form-label">Mother Name</label>
+										<input type="text" 
+											name="mother_name"
+											class="form-control form-control-sm" 
+											[(ngModel)]="student.mother_name"
+											placeholder="Mother name"
+										>
+									</div>		
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">	
+									<div class="form-group ">
+										<label for="birth_date" class="col-form-label">Birth Date</label>
+										<input type="text" 
+											name="birth_date"
+											class="form-control form-control-sm" 
+											[(ngModel)]="student.birth_date"
+											placeholder="YYYY-MM-DD"
+										>
+									</div>		
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">	
+									<div class="form-group ">
+										<label for="birth_place" class="col-form-label">Birth Place</label>
+										<input type="text" 
+											name="birth_place"
+											class="form-control form-control-sm"
+											[(ngModel)]="student.birth_place" 
+											placeholder="Birth place"
+										>
+									</div>		
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group">
+										<label for="gender" class="col-form-label">Gender</label>
+										<select name="gender" 
+											class="form-control form-control-sm"
+											[(ngModel)]="student.gender"
+										>
+											<option value="M">Male</option>
+											<option value="F">Female</option>
+											<option value="O">Other</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group">
+										<label for="blood_group" class="col-form-label">Blood Group</label>
+										<select name="blood_group" 
+											class="form-control form-control-sm"
+											[(ngModel)]="student.blood_group"
+										>
+											<option value="A-">A-</option>
+											<option value="A-">A+</option>
+											<option value="B-">B-</option>
+											<option value="B+">B+</option>
+											<option value="O-">O-</option>
+											<option value="O+">O+</option>
+											<option value="AB-">AB-</option>
+											<option value="AB+">AB+</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">	
+									<div class="form-group ">
+										<label for="caste" class="col-form-label">Caste</label>
+										<input type="text" 
+											name="caste"
+											class="form-control form-control-sm" 
+											[(ngModel)]="student.caste"
+											placeholder="Cast"
+										>
+									</div>		
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">	
+									<div class="form-group ">
+										<label for="religion" class="col-form-label">Religion</label>
+										<input type="text" 
+											name="religion"
+											class="form-control form-control-sm" 
+											[(ngModel)]="student.religion"
+											placeholder="Religion"
+										>
+									</div>		
+								</div>
+								<div class="col-8 col-sm-8 col-md-8 col-lg-8">	
+									<div class="form-group ">
+										<label for="identification_mark" class="col-form-label">Identification Mark</label>
+										<input type="text"
+											name="identification_mark" 
+											class="form-control form-control-sm"  
+											[(ngModel)]="student.identification_mark"
+											placeholder="Identification mark details"
+										>
+									</div>		
+								</div>
+							</div>
+							<div class="row mx-0">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-right">
+									<button  class="btn mx-1 btn-md btn-outline-secondary">
+										Cancel
+									</button>
+									<button type="submit" class="btn btn-md btn-outline-primary">
+										Submit
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>		
+			</section>
+			
+			<!-- Personal information section end -->
+			
+			<!--############################################################-->
+
+			<!-- Address information section start  -->
+
+			<div id="address-info" *ngIf="pageView == 2">
+				<div class="row mx-0 p-4" *ngIf="!editAddress">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 px-3 text-right mb-4">
+						<button title="ADD" (click)="newStudentAddress()" class="btn btn-sm btn-outline-primary" > 
+							New Address &nbsp;<i class="fa fa-plus"></i> 
+						</button>
+					</div>
+					<div class="col-6 col-sm-6 col-md-6 col-lg-6" *ngFor="let address of addresses;let i=index;">
+						<div class="card w-100 p-4 address-card">
+							<i class="fa fa-address-card"></i>
+							<address>
+								<!-- <label class=" ">Primary Address</label> -->
+								<h5 *ngIf="address.address_type=='PMT'" > 
+									<label class="text-uppercase font-weight-bold">
+										Permanent Address 
+									</label>
+								</h5>
+								<h5 *ngIf="address.address_type=='TMP'">
+									<label class="text-uppercase font-weight-bold">
+										Temporary Address 
+									</label>
+								</h5>
+
+								<strong>{{address.address_line1}},&nbsp;{{address.address_line2}}</strong><br>
+								{{address.location}},&nbsp;{{address.city}}<br>
+								{{address.state}}<br>
+								{{address.country}}-&nbsp;{{address.pincode}}
+							</address>
+							<div class="btn-group address-action-button">
+								<button title="EDIT" class="btn btn-sm  bg-transparent text-info px-0 mx-1" (click)="editStudentAddress(address);"><i class="fa fa-edit fa-lg"></i></button>
+								<button title="DELETE" class="btn btn-sm  bg-transparent text-danger px-0 mx-1"  (click)="confirmDeletion(address,'address')">
+									<i class="fa fa-trash fa-lg"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mx-0 p-4" *ngIf="editAddress">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
+						<form  class="p-4" name="addressForm" (ngSubmit)="f.form.valid && updateStudentAddress()" #f="ngForm" novalidate>
+							<div class="row mx-0">
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group">
+										<label for="address_type" class="col-form-label">Address Type</label>
+										<select name="address_type" 
+											class="form-control form-control-sm"
+											[(ngModel)]="address.address_type"
+											#AddressType="ngModel"
+										>
+											<option value="PMT">Permanent</option>
+											<option value="TMP">Temporary</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group ">
+										<label for="address_line1" class="col-form-label">Address Line</label>
+										<input type="text" 
+											name="address_line1"
+											class="form-control form-control-sm" 
+											[(ngModel)]="address.address_line1"
+											#AddressLine1="ngModel"
+											placeholder="Address Line 1"
+											[ngClass]="{ 'is-invalid': f.submitted && AddressLine1.invalid }" 
+											required minlength="2"
+										>
+										<div *ngIf="f.submitted && AddressLine1.invalid" class="invalid-feedback">
+											<div *ngIf="AddressLine1.errors.required">Address  is required</div>
+											<div *ngIf="AddressLine1.errors.minlength">Address must be at least 2 characters</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group ">
+										<label for="address_line2" class="col-form-label">Address Line</label>
+										<input type="text" 
+											name="address_line2"
+											class="form-control form-control-sm" 
+											[(ngModel)]="address.address_line2"
+											#AddressLine2="ngModel"
+											placeholder="Address Line 2"
+										>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group ">
+										<label for="location" class="col-form-label">Location</label>
+										<input type="text" 
+											name="location"
+											class="form-control form-control-sm" 
+											[(ngModel)]="address.location"
+											#Location="ngModel"
+											placeholder="Location"
+										>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group ">
+										<label for="city" class="col-form-label">City</label>
+										<input type="text" 
+											name="city"
+											class="form-control form-control-sm" 
+											[(ngModel)]="address.city"
+											#City="ngModel"
+											placeholder="City"
+										>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group ">
+										<label for="state" class="col-form-label">State</label>
+										<input type="text" 
+											name="state"
+											class="form-control form-control-sm" 
+											[(ngModel)]="address.state"
+											#State="ngModel"
+											placeholder="State"
+										>
+									</div>
+								</div>
+								<div class="col-6 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group ">
+										<label for="country" class="col-form-label">Country</label>
+										<input type="text" 
+											name="country"
+											class="form-control form-control-sm" 
+											[(ngModel)]="address.country"
+											#Country="ngModel"
+											placeholder="Country"
+										>
+									</div>
+								</div>
+								<div class="col-6 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group ">
+										<label for="pincode" class="col-form-label">Pincode</label>
+										<input type="text" 
+											name="pincode"
+											class="form-control form-control-sm" 
+											[(ngModel)]="address.pincode"
+											#Pincode="ngModel"
+											placeholder="pincode"
+										>
+									</div>
+								</div>
+							</div>
+							<div class="row mx-0">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-right">
+									<button class="btn btn-md mx-1 btn-outline-secondary" (click)="cancelEditAddress()">
+											Cancel
+									</button>
+									<button type="submit" class="btn btn-md  btn-outline-primary">
+										Submit
+									</button> 
+								</div>
+							</div>		
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Address information section start  -->
+			
+			<!-- ############################################################-->
+
+			<!-- Contact informaton section start -->
+
+			<section id="contact-info" *ngIf="pageView == 3">
+				<div class="row mx-0 p-4" *ngIf="!editContact">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 px-3 text-right mb-4">
+						<button title="ADD" (click)="newStudentContact()" class="btn btn-sm btn-outline-primary" > 
+							New Contact &nbsp;<i class="fa fa-plus"></i> 
+						</button>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+						<table class="table table-hover border-bottom">
+							<thead>
+								<tr>
+								<th scope="col text-uppercase"  style="width: 30%">CONTACT TYPE</th>
+								<th scope="col text-uppercase"  style="width: 30%">STD CODE</th>
+								<th scope="col text-uppercase"  style="width: 30%">NUMBER</th>
+								<th scope="col text-uppercase"	style="width: 10%">ACTIONS</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="contact-table"  *ngFor="let contact of contacts;let i=index;">
+									<th scope="row">{{contact.contact_type}}</th>
+									<td class="mx-auto">{{contact.std_code}}</td>
+									<td>{{contact.number}}</td>
+									<td>
+										<div class="btn-group contact-action-button">
+											<button title="EDIT" class="btn btn-sm  bg-transparent text-info px-0 mx-1" (click)="editStudentContact(contact);"><i class="fa fa-edit fa-lg"></i></button>
+											<button title="DELETE" class="btn btn-sm  bg-transparent text-danger px-0 mx-1" (click)="confirmDeletion(contact,'contact')">
+												<i class="fa fa-trash fa-lg"></i>
+											</button>
+										</div>		
+									</td>
+								</tr>
+							</tbody>
+						</table>		
+					</div>
+				</div>
+				<div class="row mx-0 p-4"  *ngIf="editContact">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
+						<form class="p-4"  name="contactForm" (ngSubmit)="f.form.valid && updateStudentContact()" #f="ngForm" novalidate>
+							<div class="row mx-0">
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group">
+										<label for="contact_type" class="col-form-label">Contact Type</label>
+										<select name="contact_type" 
+											class="form-control form-control-sm"
+											[(ngModel)]="contact.contact_type"
+										>
+											<option value="Primary">Primary</option>
+											<option value="Secondary">Secondary</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+										<div class="form-group">
+											<label for="std_code" class="col-form-label">STD Code</label>
+											<input type="text" 
+												name="std_code"
+												class="form-control form-control-sm" 
+												[(ngModel)]="contact.std_code"
+												#Std_code="ngModel"
+												placeholder="STD code"
+											>
+										</div>
+								</div>
+								<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+									<div class="form-group ">
+										<label for="number" class="col-form-label">Number</label>
+										<input type="text"
+											name="number"
+											class="form-control form-control-sm" 
+											[(ngModel)]="contact.number"
+											#Number="ngModel"
+											placeholder="Number"
+											[ngClass]="{ 'is-invalid': f.submitted && Number.invalid }" 
+											required minlength="2"
+										>
+										<div *ngIf="f.submitted && Number.invalid" class="invalid-feedback">
+											<div *ngIf="Number.errors.required">number is required</div>
+											<div *ngIf="Number.errors.minlength">number must be at least 2 characters</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="row mx-0">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-right">
+									<button class="btn btn-md mx-1 btn-outline-secondary" (click)="cancelEditContact()">
+											Cancel
+									</button>
+									<button type="submit" class="btn btn-md  btn-outline-primary">
+										Submit
+									</button> 
+								</div>
+							</div>
+						</form>	
+					</div>
+				</div>		
+			</section>	
+
+			<!-- Contact information section end -->
+
+			<!-- ############################################################-->
+
+			<!-- Parent information section start -->
+
+			<section id="parent-info" *ngIf="pageView == 4">
+				<div class="row mx-0 p-4" *ngIf="!editParent">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 px-3 text-right mb-4">
+						<button title="ADD" (click)="newStudentParent()" class="btn btn-sm btn-outline-primary" > 
+							New Parent &nbsp;<i class="fa fa-plus"></i> 
+						</button>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12" *ngFor="let parent of parents;let i=index;">
+						<div class="card w-100 p-4 parent-card ">
+							<div class="row mx-0">
+								<div class="col-2 col-sm-2 col-md-2 col-lg-2 p-0">
+									<img src="/static/assets/images/dummy-image.jpg" 
+										class="rounded-circle "  width="100px" height="100px"
+									>
+								</div>
+								<div class="col-9 col-sm-9 col-md-9 col-lg-9 p-0">
+									<div class="parent-details  ">
+										<h6 class="text-uppercase font-weight-bold"> 
+										&nbsp;{{parent.first_name}}
+										&nbsp;{{parent.middle_name}}
+										&nbsp;{{parent.last_name}}
+										</h6>
+										<label class="text-uppercase  pb-1 ">{{parent.parent_type}}</label>	
+									</div>
+								</div>
+							</div>
+							<div class="btn-group parent-action-button">
+								<button title="EDIT" class="btn btn-sm  bg-transparent text-info px-0 mx-1" (click)="editStudentParent(parent);">
+									<i class="fa fa-edit fa-lg"></i>
+								</button>
+								<button title="DELETE" class="btn btn-sm  bg-transparent text-danger px-0 mx-1" (click)="confirmDeletion(parent,'parent');">
+									<i class="fa fa-trash fa-lg"></i>
+								</button>
+							</div>
+						</div>	
+					</div>
+				</div>
+
+				<div class="row mx-0 p-4" *ngIf="editParent">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
+						<form class="p-4"  name="parentForm" (ngSubmit)="f.form.valid && updateStudentParent()" #f="ngForm" novalidate>
+							<div class="row mx-0">
+								<div class="col-6 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group">
+										<label for="parent_type" class="col-form-label">Parent Type</label>
+										<select name="parent_type" 
+											class="form-control form-control-sm"
+											[(ngModel)]="parent.parent_type"
+										>
+											<option value="Father">Father</option>
+											<option value="Mother">Mother</option>
+											<option value="Brother">Brother</option>
+											<option value="Sister">Sister</option>
+											<option value="Uncle">Uncle</option>
+
+										</select>
+									</div>
+								</div>
+								<div class="col-6 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group ">
+										<label for="first_name" class="col-form-label">First Name</label>
+										<input type="text" 
+											name="first_name"
+											class="form-control form-control-sm" 
+											[(ngModel)]="parent.first_name"
+											#Firstname="ngModel"
+											placeholder="First name"
+											[ngClass]="{ 'is-invalid': f.submitted && Firstname.invalid }" 
+											required minlength="2"
+										>
+										<div *ngIf="f.submitted && Firstname.invalid" class="invalid-feedback">
+											<div *ngIf="Firstname.errors.required">first name is required</div>
+											<div *ngIf="Firstname.errors.minlength">first name must be at least 2 characters</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-sm-6 col-md-6 col-lg-6">	
+									<div class="form-group">
+										<label for="middle_name" class="col-form-label">Middle Name</label>
+										<input type="text" 
+											name="middle_name"
+											class="form-control form-control-sm"
+											[(ngModel)]="parent.middle_name" 
+											placeholder="Middle name"
+										>
+									</div>		
+								</div>
+								<div class="col-6 col-sm-6 col-md-6 col-lg-6">	
+									<div class="form-group ">
+										<label for="last_name" class="col-form-label">Last Name</label>
+										<input type="text" 
+											name="last_name"
+											class="form-control form-control-sm" 
+											[(ngModel)]="parent.last_name"
+											placeholder="Last name"
+										>
+									</div>		
+								</div>
+							</div>
+							<div class="row mx-0">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-right">
+									<button class="btn btn-md mx-1 btn-outline-secondary" (click)="cancelEditParent()">
+											Cancel
+									</button>
+									<button type="submit" class="btn btn-md btn-outline-primary">
+										Submit
+									</button> 
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>	
+			</section>	
+
+			<!-- Parent information section end -->
+
+
+		</div>
+
+		<!-- Left section End -->
+
+		<!-- ################################################################-->
+
+		<!-- Right sidebar section start -->
+		
+		<div class="col-2 col-sm-2 col-md-2 col-lg-2 p-0 right-sidebar" >
+			<div class="row mx-0">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 profile-picture-container">
+					<div class="profile-picture">	
+						<img [src]="profileImage.image ? profileImage.image : studentImage.imageUrl "  
+							class="rounded-circle mx-auto d-block img-fluid"
+							[width]="cropperSettings.croppedWidth" 
+							[height]="cropperSettings.croppedHeight" 
+						>
+						<label for="file-input">	
+							<i class="fa fa-camera"></i>
+						</label>	
+						<input id="file-input"  (change)="onChangeProfileImage($event)" type="file"/>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 side-item">
+					<ul>
+						<li [ngClass]=" pageView == 1 ? 'active' : '' ">
+							<i class="fa fa-address-book-o"></i>
+							<a href="javascript:void(0)" (click)="changePageView(1)" >Personal </a>
+						</li>
+						
+						<li [ngClass]=" pageView == 2 ? 'active' : '' ">
+							<i class="fa fa-home"></i>
+							<a href="javascript:void(0)" (click)="changePageView(2)">Address</a>
+						</li>
+						
+						<li [ngClass]=" pageView == 3 ? 'active' : '' ">
+							<i class="fa fa-phone-square"></i>
+							<a href="javascript:void(0)" (click)="changePageView(3)">Contact </a>
+						</li>
+						<li [ngClass]=" pageView == 4 ? 'active' : '' ">
+							<i class="fa fa-user"></i>
+							<a href="javascript:void(0)" (click)="changePageView(4)">Parent </a>
+						</li>
+					</ul>	
+				</div>	
+			</div>
+		</div>	
+		<!-- Right sidebar section start -->
+	</div>
+
+</div>
+<!-- Component section end -->
+
+<!--##################################################################-->
+
+<!-- delete student confirmation start -->
+
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1"role="dialog" aria-labelledby="dialog-child-name">
+		<div class="modal-dialog modal-sm">
+		  <div class="modal-content">
+			  <div class="modal-header bg-danger text-white p-2">
+				  <h4 id="dialog-child-name" class="modal-title pull-left">DELETE</h4>
+				  <button type="button" class="close text-white pull-right" aria-label="Close" (click)="childModal.hide();">
+				  <span aria-hidden="true">&times;</span>
+				  </button>
+			  </div>
+			  <div class="modal-body ">
+				  <div class="row">
+					  <div class="col-12 col-sm-12 col-md-12 col-lg-12 m-1 text-left">
+						  <i class="fa fa-question-circle-o fa-lg mr-2" aria-hidden="true"></i>
+						  Are	 you sure  to delete?
+					  </div>	
+					  <div class="col-12 col-sm-12 col-md-12 col-lg-12 m-1 text-right">
+						  <button type="submit" class="btn mx-1 btn-sm btn-outline-primary" (click)="deleteRecord();">
+							  YES
+						  </button>
+						  <button  class="btn mx-1 btn-sm btn-outline-secondary" (click)="deleteModal.hide()">
+							  NO
+						  </button>
+					  </div>
+				  </div>  				
+			  </div>
+  
+		  </div>
+	  </div>
+  </div>
+  
+  <!-- dlete student confirmation end -->
+
+  <!--student  profile image cropper start -->
+
+<div bsModal #profileImageModal="bs-modal" class="modal fade" tabindex="-1"role="dialog" aria-labelledby="dialog-child-name">
+	<div class="modal-dialog modal-md">
+	  	<div class="modal-content">
+			<div class="modal-header  p-2">
+				<h4 id="dialog-child-name" class="modal-title pull-left">CROP IMAGE</h4>
+				<button type="button" class="close text-white pull-right" aria-label="Close" (click)="profileImageModal.hide();">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body ">
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+						<img-cropper #profilImageCropper [image]="profileImage" [settings]="cropperSettings"></img-cropper>
+					</div>	
+				</div>	
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 m-1 text-right">
+					<button  class="btn mx-1 btn-sm btn-outline-primary" (click)="saveProfileImage();">
+						YES
+					</button>
+					<button  class="btn mx-1 btn-sm btn-outline-secondary" (click)="profileImageModal.hide()">
+						NO
+					</button>
+				</div>
+			</div>  				
+		</div>
+	</div>
+</div>
+
+  <!-- student profile image cropper end -->

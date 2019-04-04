@@ -1,0 +1,204 @@
+<div class="component-section">
+	<div class="row mx-0">
+		<div class="col-12 col-sm-12 p-0">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					
+					<li class="breadcrumb-item "
+						[ngClass]=" this.selected.length == 0 ? 'active' : '' "
+					>
+						Students
+					</li>
+					
+					<li *ngIf=" this.selected.length > 0 " class=" active breadcrumb-item" 
+						aria-current="personal-info"
+					>
+						{{this.selected[0].first_name}}
+					</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<div class="row mx-0 p-4">
+		<div class="col-4 col-sm-4 col-md-4 col-lg- text-left">
+			<input
+				type='text'
+				class="form-control form-control-sm"
+				placeholder='Search...'
+				(keyup)='studentFilter($event)'
+			/>
+		</div>
+		<div class="col-8 col-sm-8 col-md-8 col-lg-8  text-right">				
+			<button title="DELETE" (click)="deleteModal.show()" class="btn btn-sm mx-1  text-uppercase btn-outline-danger" *ngIf="studentDelete" > 
+				Delete &nbsp;<i class="fa  fa-trash"></i> 
+			</button>
+			<button title="REFRESH" (click)="getStudents()" class="btn btn-sm mx-1 btn-outline-info  text-uppercase" > 
+				Refresh &nbsp;<i class="fa  fa-refresh"></i>  
+			</button>
+			<button title="ADD" (click)="newStudent()" class="btn btn-sm btn-outline-primary  text-uppercase" > 
+				New &nbsp;<i class="fa fa-plus"></i> 
+			</button>
+		</div>
+		<div class="col-sm-12 col-12 my-2"> 
+			<ngx-datatable
+				#table
+				class='bootstrap striped' 
+				[columnMode]="'force'"
+				[headerHeight]="50"
+				[footerHeight]="50"
+				[rowHeight]="'auto'"
+        		[limit]="10"
+				[rows]='rows'
+				[selectionType]="'single'"
+				(select)='onSelect($event)'
+				(dblclick)="onDoubleClick($event)"
+				
+			>   
+			
+				<ngx-datatable-column [minWidth]="20" [sortable]="false" name="logo">
+					<ng-template let-column="column"   ngx-datatable-header-template>
+						Name
+					</ng-template>
+					<ng-template let-row="row" ngx-datatable-cell-template>
+						<!-- <img src={{row.logoUrl}} alt="" width="80px" height="60px"> -->
+						{{row.first_name}} 
+						<!-- ////&nbsp;{{row.middle_name}}&nbsp;{{row.last_name}} -->
+					</ng-template>
+				</ngx-datatable-column>
+				
+				<ngx-datatable-column [minWidth]="20" [sortable]="true"> 
+					<ng-template let-column="column" ngx-datatable-header-template >
+						Middle Name
+					</ng-template>
+					<ng-template let-row="row" ngx-datatable-cell-template >
+						{{row.middle_name}}
+					</ng-template>
+				</ngx-datatable-column>
+				
+				<ngx-datatable-column [minWidth]="20" [sortable]="true"> 
+					<ng-template let-column="column" ngx-datatable-header-template >
+						Last Name
+					</ng-template>
+					<ng-template let-row="row" ngx-datatable-cell-template >
+						{{row.last_name}}
+					</ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column [minWidth]="20" [sortable]="true"> 
+					<ng-template let-column="column" ngx-datatable-header-template >
+						Mother Name
+					</ng-template>
+					<ng-template let-row="row" ngx-datatable-cell-template >
+						{{row.mother_name}}
+					</ng-template>
+				</ngx-datatable-column>
+
+				<ngx-datatable-column [minWidth]="20" [sortable]="true"> 
+					<ng-template let-column="column" ngx-datatable-header-template >
+						Birth Date
+					</ng-template>
+					<ng-template let-row="row" ngx-datatable-cell-template >
+						{{row.birth_date}}
+					</ng-template>
+				</ngx-datatable-column>
+
+				<!-- <ngx-datatable-column [minWidth]="50" [sortable]="false">
+					<ng-template let-column="column" ngx-datatable-header-template >
+						Address
+					</ng-template>
+					<ng-template let-row="row" ngx-datatable-cell-template>
+						{{row.addressLine1}} {{row.addressLine2}},{{row.city}}-{{row.postCode}}
+					</ng-template>
+				</ngx-datatable-column>  -->
+			</ngx-datatable>    
+		</div>
+	</div>
+</div>	
+
+
+<!-- Student form start -->
+
+<div bsModal #childModal="bs-modal" [config]="{ ignoreBackdropClick: true }" class="modal fade" tabindex="-1"role="dialog" aria-labelledby="dialog-child-name">
+  	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 id="dialog-child-name" class="modal-title pull-left">ADD STUDENT</h4>
+				<button type="button" class="close pull-right" aria-label="Close" (click)="childModal.hide();">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body p-0">
+				<form class="p-4"  name="studentForm" (ngSubmit)="f.form.valid && addStudent()" #f="ngForm" novalidate>
+					<div class="row mx-0">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="form-group ">
+								<label for="first_name" class="col-form-label">First Name</label>
+								<input type="text" 
+									name="first_name"
+									class="form-control form-control-sm" 
+									[(ngModel)]="student.first_name"
+									#firstName="ngModel"
+									placeholder="First name"
+									[ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" 
+									required minlength="2"
+								>
+								<div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+									<div *ngIf="firstName.errors.required">first name is required</div>
+									<div *ngIf="firstName.errors.minlength">first name must be at least 2 characters</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-right">
+							<button  class="btn mx-1 btn-md btn-outline-secondary" (click)="childModal.hide();f.reset();">
+								Cancel
+							</button>
+							<button type="submit" class="btn mx-1 btn-md btn-outline-primary">
+								Submit
+							</button>
+						</div>
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Student form end -->
+
+
+<!-- delete student confirmation start -->
+
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1"role="dialog" aria-labelledby="dialog-child-name">
+  	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white p-2">
+				<h4 id="dialog-child-name" class="modal-title pull-left">DELETE</h4>
+				<button type="button" class="close text-white pull-right" aria-label="Close" (click)="childModal.hide();">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body ">
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 m-1 text-left">
+						<i class="fa fa-question-circle-o fa-lg mr-2" aria-hidden="true"></i>
+						Are	 you sure  to delete?
+					</div>	
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 m-1 text-right">
+						<button type="submit" class="btn mx-1 btn-sm btn-outline-primary" (click)="deleteStudent();">
+							YES
+						</button>
+						<button  class="btn mx-1 btn-sm btn-outline-secondary" (click)="deleteModal.hide()">
+							NO
+						</button>
+					</div>
+				</div>  				
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- dlete student confirmation end -->

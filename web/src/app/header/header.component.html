@@ -1,0 +1,15 @@
+<header class=" w-100">
+	<nav class="navbar navbar-expand-lg fixed-top p-2 " style="margin-left: -10px ;background-color: #f7f7f7;    border-bottom: 1px solid #e4e4e4; height: 55px;">
+		<div class="dropdown ml-auto">
+			<img src={{photoUrl}} alt="" height="40px">
+
+			<a class="nav-link font-weight-bold" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				{{username}}
+			</a>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-left:-60px;margin-top: 0px; ">
+				<a class="dropdown-item" href="javascript:void(0)" (click)="changePassword()">change-password</a>
+				<a class="dropdown-item" href="javascript:void(0)" (click)="logout()">Logout</a>
+			</div>
+		</div>
+	</nav>
+</header>

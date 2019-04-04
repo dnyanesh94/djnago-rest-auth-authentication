@@ -1,0 +1,75 @@
+:host /deep/{
+	
+	header .navbar {
+		background-color: #ffffff !important;
+		//height: 65px;
+	}
+
+	header .navbar .dropdown-toggle:after { 
+		content: none 
+	}
+
+	.main-section {
+		padding-top:52px; 
+	}
+
+	.main-sidebar {
+		// top:4rem;
+		min-height: 100vh;
+		background-color: #233237;
+		padding: 0;
+		top: 52px;
+		position: fixed;
+	}
+
+	.main-sidebar .logo-section {
+		
+		height: 150px;
+		background-color: #000000;
+		text-align: center;
+		padding-left: 0px;
+		padding-right: 0px; 
+	}
+
+	.main-sidebar .logo-container {
+		
+		margin-top:15px;
+		margin-bottom: 15px;	 
+	}
+	.main-sidebar .item-section{
+		padding-left:0px;
+		padding-right:0px;
+	  
+	} 
+
+	.main-sidebar .item-section ul {
+		
+		list-style-type: none; 
+		margin: 0px !important;
+		padding: 0px !important;
+	}
+
+	.main-sidebar .item-section li {
+		font-size: 15px;
+		// margin-top:15px;
+		// margin-bottom: 15px; 
+		color:#FFFFFF;
+		padding:15px; 
+	}
+
+	.main-sidebar .item-section li:hover,
+	.main-sidebar .item-section li:hover a{
+		background-color: #E9E9E9;
+		color: #000000;
+	}
+	
+	.main-sidebar .item-section li a{	
+		margin-left: 15px;
+		text-decoration: none;
+		color: white;
+		text-transform: uppercase;
+		font-weight: bold;
+		
+	}
+
+}
