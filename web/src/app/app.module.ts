@@ -22,8 +22,7 @@ import { HeaderComponent } from './header/header.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetPasswordConfirmComponent } from './reset-password-confirm/reset-password-confirm.component';
-import { StudentListComponent } from './student-list/student-list.component';
-import { StudentDetailsComponent } from './student-details/student-details.component';
+
 
 @NgModule({
   declarations: [
@@ -34,9 +33,7 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 	ChangePasswordComponent,
 	ResetPasswordComponent,
 	ResetPasswordConfirmComponent,
-	StudentListComponent,
-	StudentDetailsComponent,
-    
+	
   ],
   imports: [
 	BrowserModule,

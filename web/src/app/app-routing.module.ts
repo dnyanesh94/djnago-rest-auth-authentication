@@ -19,10 +19,7 @@ const routes: Routes = [
   
 		
 	  	children: [ 	  
-			{path:'student-list',component:StudentListComponent},
-			
-			{path:'student-details/:id',component:StudentDetailsComponent},
-			
+			// other childrens here
 			{ path: 'password/change', component: ChangePasswordComponent },
 		
 	  	],
@@ -32,8 +29,9 @@ const routes: Routes = [
 	{path: 'login', component: LoginComponent  },
 	{path: 'password/reset', component: ResetPasswordComponent  },
 	{path: 'password/reset/confirm/:uid/:token', component: ResetPasswordConfirmComponent },
-	{path: '**', redirectTo: '/main/student-list', pathMatch: 'prefix'},
-	{path: '', redirectTo: '/main/student-list', pathMatch: 'prefix'}
+		//default redirect parh
+	// {path: '**', redirectTo: '/main/student-list', pathMatch: 'prefix'},
+	// {path: '', redirectTo: '/main/student-list', pathMatch: 'prefix'}
 	
   ];
 
